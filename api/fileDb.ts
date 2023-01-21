@@ -14,9 +14,15 @@ const fileDb = {
             data = [];
         }
     },
+    async getMessages() {
+        return data.slice(-30);
+    },
+    async getMessageAfterDate(id: string) {
+        return data.filter(message => message.datetime > id)
+    },
     async addMessage(message: MessageWithoutId) {
         const newMessage = {
-            id:  randomUUID(),
+            id: randomUUID(),
             datetime: new Date().toISOString(),
             ...message,
         };
