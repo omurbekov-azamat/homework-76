@@ -1,18 +1,13 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from "../../../app/hooks";
-import {selectMessages} from "../messagesSlice";
-import {fetchMessages} from "../messagesThunks";
+import React from 'react';
 import {Grid} from "@mui/material";
 import MessageItem from "./MessageItem";
+import {Message} from "../../../types";
 
-const MessageItems = () => {
-    const dispatch = useAppDispatch();
-    const messages = useAppSelector(selectMessages);
+interface Props {
+    messages: Message[]
+}
 
-    useEffect(() => {
-        dispatch(fetchMessages());
-    }, [dispatch])
-
+const MessageItems: React.FC<Props> = ({messages}) => {
     return (
         <Grid container direction='column' spacing={2}>
             {messages.map((message) => (

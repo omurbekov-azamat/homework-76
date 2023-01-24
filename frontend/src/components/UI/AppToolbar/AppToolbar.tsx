@@ -1,21 +1,18 @@
 import React from 'react';
-import {Link as NavLink} from 'react-router-dom';
-import {AppBar, styled, Toolbar, Typography} from '@mui/material';
+import {AppBar, Toolbar, Typography} from '@mui/material';
 
-const Link = styled(NavLink)({
-    color: 'inherit',
-    textDecoration: 'none',
-    '&:hover': {
-        color: 'inherit'
-    },
-});
+export const container = {
+    width: '800px',
+    margin: '0 auto',
+    padding: '10px',
+}
 
 const AppToolbar = () => {
     return (
-        <AppBar position="sticky" sx={{mb: 2}}>
-            <Toolbar>
+        <AppBar position="sticky" >
+            <Toolbar style={container}>
                 <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-                    <Link to="/messages">Chat</Link>
+                    Chat
                 </Typography>
             </Toolbar>
         </AppBar>

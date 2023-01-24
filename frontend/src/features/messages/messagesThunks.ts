@@ -1,11 +1,29 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
-import {Message} from "../../types";
+import {Message, MessageMutation} from "../../types";
 
-export const fetchMessages = createAsyncThunk<Message[]>(
+
+interface PropsMutations {
+    items: Message[],
+    lastDate: string;
+}
+
+export const fetchMessages = createAsyncThunk<PropsMutations, string>(
     'messages/fetchAll',
-    async () => {
-        const responseMessages = await axiosApi.get<Message[]>('/messages');
-        return responseMessages.data;
+    async (date) => {
+        const responseMessages = await axiosApi.get<Message[]>('/messages?datetime=' + date);
+        const messages = responseMessages.data;
+        const lastDate = messages[messages.length -1].datetime;
+        return {
+            items: messages,
+            lastDate,
+        }
     }
-)
+);
+
+export const createMessage = createAsyncThunk<void, MessageMutation>(
+    'message/createMessage',
+    async (message) => {
+        await axiosApi.post('/messages', message);
+    }
+);

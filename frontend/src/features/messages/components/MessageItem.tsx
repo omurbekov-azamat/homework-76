@@ -1,5 +1,6 @@
 import React from 'react';
 import {Card, CardContent, Grid, Typography} from "@mui/material";
+import dayjs from "dayjs";
 import {Message} from "../../../types";
 
 interface Props {
@@ -23,7 +24,7 @@ const MessageItem: React.FC<Props> = ({message}) => {
                         </Grid>
                         <Grid item>
                             <Typography variant='caption' color="blue">
-                                Datetime: {message.datetime}
+                                Datetime: {dayjs(message.datetime).format('DD.MM.YYYY HH:mm:ss')}
                             </Typography>
                         </Grid>
                         <Grid item>
